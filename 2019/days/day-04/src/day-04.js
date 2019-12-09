@@ -117,6 +117,6 @@
   // Output puzzles
   document.getElementById("answer1").innerText = puzzle1Answer;
   document.getElementById("answer2").innerText = puzzle2Answer;
-  console.log(`Day 03 Puzzle 1 Answer: ${puzzle1Answer}`);
-  console.log(`Day 03 Puzzle 2 Answer: ${puzzle2Answer}`);
+  console.log(`Day 04 Puzzle 1 Answer: ${puzzle1Answer}`);
+  console.log(`Day 04 Puzzle 2 Answer: ${puzzle2Answer}`);
 })();
