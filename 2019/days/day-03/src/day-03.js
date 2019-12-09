@@ -1,4 +1,4 @@
-(async function day01() {
+(async function day03() {
   const input = await fetch("input/input.txt");
   const res = await input.text();
 
