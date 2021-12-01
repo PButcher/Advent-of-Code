@@ -1,0 +1,13 @@
+{
+  "name": "aoc2021",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "npx http-server './' -p 3000"
+  },
+  "dependencies": {
+    "http-server": "^0.12.0"
+  }
+}
