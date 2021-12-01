@@ -7,12 +7,13 @@
     return res
       .trim()
       .split("\n")
+      .map((i) => parseInt(i))
       .map(depthMeasurementIncreases)
-      .filter((c) => c === true).length;
+      .filter((c) => c).length;
   }
 
-  function depthMeasurementIncreases(depth, i, measurements) {
-    return i === 0 ? false : parseInt(depth) > parseInt(measurements[i - 1]);
+  function depthMeasurementIncreases(d, i, m) {
+    return d > m[i - 1];
   }
 
   // Puzzle 2
@@ -20,27 +21,16 @@
     return res
       .trim()
       .split("\n")
+      .map((i) => parseInt(i))
       .map(depthMeasurementIncreasesSlidingWindow)
-      .filter((c) => c === true).length;
+      .filter((c) => c).length;
   }
 
-  function depthMeasurementIncreasesSlidingWindow(depth, i, measurements) {
-    let currentWindow =
-      i >= 2 && i < measurements.length
-        ? parseInt(measurements[i]) +
-          parseInt(measurements[i - 1]) +
-          parseInt(measurements[i - 2])
-        : null;
-    let previousWindow =
-      i >= 3
-        ? parseInt(measurements[i - 1]) +
-          parseInt(measurements[i - 2]) +
-          parseInt(measurements[i - 3])
-        : null;
+  function depthMeasurementIncreasesSlidingWindow(_, i, m) {
+    let curr = m[i] + m[i - 1] + m[i - 2];
+    let prev = m[i - 1] + m[i - 2] + m[i - 3];
 
-    return currentWindow !== null && previousWindow !== null
-      ? currentWindow > previousWindow
-      : false;
+    return curr > prev;
   }
 
   // Run puzzles
