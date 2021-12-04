@@ -2,13 +2,14 @@
   const input = await fetch("input/input.txt");
   const res = await input.text();
   const parsedInput = res.trim().split("\n");
-
   const mark = "X";
 
+  // Parse draw order from input
   function getDrawOrder() {
     return parsedInput[0].split(",").map((el) => parseInt(el));
   }
 
+  // Parse boards from input
   function getBoards() {
     const boardCount = (parsedInput.length - 1) / 6;
     let boards = [];
@@ -43,7 +44,7 @@
       }
       if (checkWin(board)) {
         const scoredBoard = scoreBoard(board, num);
-        return { score: scoredBoard, lastNumber: num, wonOnDraw: draw };
+        return { score: scoredBoard, lastNumber: num, wonOnDraw: draw, board };
       }
     }
     return { score: 0, lastNumber: num };
@@ -64,7 +65,7 @@
     for (let col = 0; col < 5; col++) {
       let marksOnCol = 0;
       for (let row = 0; row < 5; row++) {
-        if (board[col][row] === mark) marksOnCol++;
+        if (board[row][col] === mark) marksOnCol++;
       }
       if (marksOnCol === 5) return true;
     }
@@ -81,13 +82,17 @@
         if (board[row][col] !== mark) unmarkedTotal += board[row][col];
       }
     }
+
+    if (lastNumber === 1) {
+      console.log(unmarkedTotal, lastNumber, board);
+    }
     return unmarkedTotal * lastNumber;
   }
 
+  // Solve all the boards
   function solveAllBoards() {
     const boards = getBoards();
     const drawOrder = getDrawOrder();
-
     const solvedBoards = [];
 
     for (let board = 0; board < boards.length; board++) {
@@ -97,6 +102,7 @@
     return solvedBoards;
   }
 
+  // Board with best score
   function getBestBoardScore() {
     const boards = getBoards();
     const solvedBoards = solveAllBoards();
@@ -114,6 +120,7 @@
     return bestScore;
   }
 
+  // Board with worst score
   function getWorstBoardScore() {
     const boards = getBoards();
     const solvedBoards = solveAllBoards();
@@ -126,8 +133,6 @@
         worstScore = solvedBoards[board].score;
       }
     }
-
-    console.log(solvedBoards);
 
     return worstScore;
   }
