@@ -25,17 +25,18 @@
 
   // Creates a . filled map
   function createMap(lines) {
-    const maxX1 = Math.max(...lines.map((el) => el.x1));
-    const maxY1 = Math.max(...lines.map((el) => el.y1));
-    const maxX2 = Math.max(...lines.map((el) => el.x2));
-    const maxY2 = Math.max(...lines.map((el) => el.y2));
-
-    const maxX = Math.max(maxX1, maxX2);
-    const maxY = Math.max(maxY1, maxY2);
+    const maxX = Math.max(
+      Math.max(...lines.map((el) => el.x1)),
+      Math.max(...lines.map((el) => el.y1))
+    );
+    const maxY = Math.max(
+      Math.max(...lines.map((el) => el.x2)),
+      Math.max(...lines.map((el) => el.y2))
+    );
 
     return Array(maxY + 1)
       .fill()
-      .map(() => Array(maxX + 1).fill("."));
+      .map(() => Array(maxX + 1).fill(0));
   }
 
   // Plots all lines on map
@@ -48,12 +49,7 @@
         let lineLength = Math.abs(lines[line].y1 - lines[line].y2) + 1;
 
         for (let i = 0; i < lineLength; i++) {
-          let p = map[start + i][lines[line].x1];
-          if (p === ".") {
-            map[start + i][lines[line].x1] = 1;
-          } else {
-            map[start + i][lines[line].x1]++;
-          }
+          map[start + i][lines[line].x1]++;
         }
       } else if (lines[line].y1 === lines[line].y2) {
         // Horizontal
@@ -61,72 +57,40 @@
         let lineLength = Math.abs(lines[line].x1 - lines[line].x2) + 1;
 
         for (let i = 0; i < lineLength; i++) {
-          let p = map[lines[line].y1][start + i];
-          if (p === ".") {
-            map[lines[line].y1][start + i] = 1;
-          } else {
-            map[lines[line].y1][start + i]++;
-          }
+          map[lines[line].y1][start + i]++;
         }
       } else {
         // Diagonal
         let lineLength = Math.abs(lines[line].x1 - lines[line].x2) + 1;
 
-        console.log(lineLength);
-
-        let xPositive = lines[line].x2 - lines[line].x1 > 0;
-        let yPositive = lines[line].y2 - lines[line].y1 > 0;
+        let xPos = lines[line].x2 - lines[line].x1 > 0;
+        let yPos = lines[line].y2 - lines[line].y1 > 0;
 
         // ++
-        if (xPositive && yPositive) {
-          console.log("++", lines[line]);
+        if (xPos && yPos) {
           for (let i = 0; i < lineLength; i++) {
-            let p = map[lines[line].y1 + i][lines[line].x1 + i];
-            if (p === ".") {
-              map[lines[line].y1 + i][lines[line].x1 + i] = 1;
-            } else {
-              map[lines[line].y1 + i][lines[line].x1 + i]++;
-            }
+            map[lines[line].y1 + i][lines[line].x1 + i]++;
           }
         }
 
         // +-
-        if (xPositive && !yPositive) {
-          console.log("+-", lines[line]);
+        if (xPos && !yPos) {
           for (let i = 0; i < lineLength; i++) {
-            let p = map[lines[line].y1 - i][lines[line].x1 + i];
-            // console.log(p, lines[line].x1 - i, lines[line].y1 + i);
-            if (p === ".") {
-              map[lines[line].y1 - i][lines[line].x1 + i] = 1;
-            } else {
-              map[lines[line].y1 - i][lines[line].x1 + i]++;
-            }
+            map[lines[line].y1 - i][lines[line].x1 + i]++;
           }
         }
 
         // -+
-        if (!xPositive && yPositive) {
-          console.log("-+", lines[line]);
+        if (!xPos && yPos) {
           for (let i = 0; i < lineLength; i++) {
-            let p = map[lines[line].y2 - i][lines[line].x2 + i];
-            if (p === ".") {
-              map[lines[line].y2 - i][lines[line].x2 + i] = 1;
-            } else {
-              map[lines[line].y2 - i][lines[line].x2 + i]++;
-            }
+            map[lines[line].y2 - i][lines[line].x2 + i]++;
           }
         }
 
         // --
-        if (!xPositive && !yPositive) {
-          console.log("--", lines[line]);
+        if (!xPos && !yPos) {
           for (let i = 0; i < lineLength; i++) {
-            let p = map[lines[line].y1 - i][lines[line].x1 - i];
-            if (p === ".") {
-              map[lines[line].y1 - i][lines[line].x1 - i] = 1;
-            } else {
-              map[lines[line].y1 - i][lines[line].x1 - i]++;
-            }
+            map[lines[line].y1 - i][lines[line].x1 - i]++;
           }
         }
       }
@@ -139,7 +103,7 @@
     let count = 0;
     for (let row = 0; row < map.length; row++) {
       for (let col = 0; col < map[0].length; col++) {
-        if (map[row][col] !== "." && map[row][col] !== 1) {
+        if (map[row][col] > 1) {
           count++;
         }
       }
@@ -174,7 +138,6 @@
   // Puzzle 2
   function puzzle2() {
     const coordPairs = getCoordinatePairs();
-
     const map = plotMap(coordPairs);
 
     return countOverlaps(map);
