@@ -4,36 +4,60 @@
   const parsedInput = res
     .trim()
     .split(",")
-    .map((el) => parseInt(el))
-    .sort((a, b) => a - b);
+    .map((el) => parseInt(el));
 
-  // Find the median position in an array
-  function medianPosition(positions) {
-    // Centre of array (not always integer)
-    let centre = Math.floor(positions.length / 2);
-
-    // Handle cases where positions array has even and odd length
-    if (positions.length % 2 !== 0) {
-      // Array has odd length, use middle value
-      return positions[middle];
-    } else {
-      // Array has even length, use mean of two central positions
-      return (positions[centre] + positions[centre - 1]) / 2;
+  // Calculate fuel for crab subs
+  // System param:
+  // - 1 for puzzle 1 (step 1 = 1 fuel, step 2 = 1 fuel...)
+  // - 2 for puzzle 2 (step 1 = 1 fuel, step 2 = 2 fuel...)
+  function calcCrabSubFuel(dist, system) {
+    let fuel = 0;
+    for (let unit = 0; unit <= dist; unit++) {
+      if (system === 1) {
+        fuel += 1;
+      } else {
+        fuel += unit;
+      }
     }
+    return fuel;
+  }
+
+  // Calculate crab alignment strategy
+  function calcCrabAlignmentStrategy(system) {
+    let crabs = [...parsedInput];
+
+    let min = Math.min(...crabs);
+    let max = Math.max(...crabs);
+
+    // Position with lowest fuel consumption
+    let bestConsumption = Infinity;
+
+    // All possible positions
+    for (let pos = min; pos <= max; pos++) {
+      let totalFuelConsumption = 0;
+
+      // All crabs
+      for (let crab of crabs) {
+        totalFuelConsumption += calcCrabSubFuel(Math.abs(pos - crab), system);
+      }
+
+      // Get position of lowest fuel consumption for all crabs
+      if (totalFuelConsumption <= bestConsumption) {
+        bestConsumption = totalFuelConsumption;
+      }
+    }
+
+    return bestConsumption;
   }
 
   // Puzzle 1
   function puzzle1() {
-    let median = medianPosition(parsedInput);
-    let distancesToMedian = parsedInput.map((el) => Math.abs(el - median));
-    let fuelConsumption = distancesToMedian.reduce((a, b) => a + b);
-
-    return fuelConsumption;
+    return calcCrabAlignmentStrategy(1);
   }
 
   // Puzzle 2
   function puzzle2() {
-    return 0;
+    return calcCrabAlignmentStrategy(2);
   }
 
   // Run puzzles
