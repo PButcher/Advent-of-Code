@@ -29,9 +29,43 @@
     return lanternFishSimulation(population, 80).length;
   }
 
+  function getLanternFishAges(population, days) {
+    // Store an array of age counts
+    let ages = Array(9).fill(0);
+
+    // Generate counts of each fish age
+    for (let age = 0; age < population.length; age++) {
+      ages[population[age]]++;
+    }
+
+    // Simulate days
+    for (let day = 0; day < days; day++) {
+      // Ages of fish after this cycle
+      const agesThisCycle = [];
+
+      // Shift age counts one to the left
+      for (let age = 0; age < 9; age++) {
+        agesThisCycle[age] = ages[age + 1];
+      }
+
+      // Add newborns
+      agesThisCycle[8] = ages[0];
+
+      // Reset parent ages
+      agesThisCycle[6] += ages[0];
+
+      ages = agesThisCycle;
+    }
+    return ages;
+  }
+
   // Puzzle 2
   function puzzle2() {
-    return 0;
+    const population = parsedInput;
+
+    const ages = getLanternFishAges(population, 256);
+
+    return ages.reduce((a, b) => b + a, 0);
   }
 
   // Run puzzles
