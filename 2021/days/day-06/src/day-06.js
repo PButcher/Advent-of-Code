@@ -44,7 +44,7 @@
       const agesThisCycle = [];
 
       // Shift age counts one to the left
-      for (let age = 0; age < 9; age++) {
+      for (let age = 0; age < 8; age++) {
         agesThisCycle[age] = ages[age + 1];
       }
 
