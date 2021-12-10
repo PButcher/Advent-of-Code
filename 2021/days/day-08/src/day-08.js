@@ -62,8 +62,6 @@
       7 segs = 8    a, b, c, d, e, f, g
     */
 
-    console.log(parsedInput);
-
     let sumOfOutputs = 0;
 
     // Display digits
@@ -96,6 +94,7 @@
       for (let digit of inputDigits) {
         if (digit.length === 5) {
           // 2, 3, 5
+
           if (deducedDigits[1].split("").every((seg) => digit.includes(seg))) {
             // 3
             deducedDigits[3] = digit;
