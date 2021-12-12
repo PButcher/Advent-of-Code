@@ -5,7 +5,40 @@
 
   // Puzzle 1
   function puzzle1() {
-    return 0;
+    console.log(parsedInput);
+
+    let legalPairs = {
+      "(": ")",
+      "[": "]",
+      "{": "}",
+      "<": ">",
+    };
+
+    let points = {
+      ")": 3,
+      "]": 57,
+      "}": 1197,
+      ">": 25137,
+    };
+
+    let syntaxErrorScore = 0;
+
+    for (let line of parsedInput) {
+      let stack = [];
+      for (let i = 0; i < line.length; i++) {
+        if (line[i] in legalPairs) {
+          stack.push(line[i]);
+        } else if (line[i] === legalPairs[stack[stack.length - 1]]) {
+          stack.pop();
+        } else {
+          syntaxErrorScore += points[line[i]];
+          break;
+        }
+      }
+      stack = [];
+    }
+
+    return syntaxErrorScore;
   }
 
   // Puzzle 2
