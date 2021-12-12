@@ -3,27 +3,34 @@
   const res = await input.text();
   const parsedInput = res.trim().split("\n");
 
+  let legalPairs = {
+    "(": ")",
+    "[": "]",
+    "{": "}",
+    "<": ">",
+  };
+
+  let syntaxErrorPoints = {
+    ")": 3,
+    "]": 57,
+    "}": 1197,
+    ">": 25137,
+  };
+
+  let autoCompletePoints = {
+    ")": 1,
+    "]": 2,
+    "}": 3,
+    ">": 4,
+  };
+
   // Puzzle 1
   function puzzle1() {
-    console.log(parsedInput);
-
-    let legalPairs = {
-      "(": ")",
-      "[": "]",
-      "{": "}",
-      "<": ">",
-    };
-
-    let points = {
-      ")": 3,
-      "]": 57,
-      "}": 1197,
-      ">": 25137,
-    };
-
     let syntaxErrorScore = 0;
 
-    for (let line of parsedInput) {
+    let lines = [...parsedInput];
+
+    for (let line of lines) {
       let stack = [];
       for (let i = 0; i < line.length; i++) {
         if (line[i] in legalPairs) {
@@ -31,7 +38,7 @@
         } else if (line[i] === legalPairs[stack[stack.length - 1]]) {
           stack.pop();
         } else {
-          syntaxErrorScore += points[line[i]];
+          syntaxErrorScore += syntaxErrorPoints[line[i]];
           break;
         }
       }
@@ -43,7 +50,40 @@
 
   // Puzzle 2
   function puzzle2() {
-    return 0;
+    let lines = [...parsedInput];
+
+    let closing = [];
+    let scores = [];
+
+    for (let line of lines) {
+      let stack = [];
+      let err = false;
+      for (let i = 0; i < line.length; i++) {
+        if (line[i] in legalPairs) {
+          stack.push(line[i]);
+          closing.push(legalPairs[line[i]]);
+        } else if (line[i] === legalPairs[stack[stack.length - 1]]) {
+          stack.pop();
+          closing.pop();
+        } else {
+          err = true;
+          break;
+        }
+      }
+      if (!err) {
+        closing.reverse();
+        let score = 0;
+        for (let tag of closing) {
+          score = score * 5;
+          score += autoCompletePoints[tag];
+        }
+        scores.push(score);
+      }
+      closing = [];
+      stack = [];
+    }
+
+    return scores.sort((a, b) => b - a)[Math.floor(scores.length / 2)];
   }
 
   // Run puzzles
