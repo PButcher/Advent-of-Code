@@ -1,7 +1,9 @@
 # Advent of Code
 
-Advent of Code solutions
+My [Advent of Code](https://adventofcode.com/) solutions.
 
-- [2019](https://github.com/PButcher/Advent-of-Code/tree/master/2019)
-- 2020
-- [2021](https://github.com/PButcher/Advent-of-Code/tree/master/2021)
+| Year         | Language   | Days Attempted |
+| ------------ | ---------- | -------------- |
+| [2019](2019) | JavaScript | 4              |
+| [2021](2021) | JavaScript | 10             |
+| [2023](2023) | TypeScript | 0              |
