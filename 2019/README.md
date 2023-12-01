@@ -1,5 +1,7 @@
 # Advent of Code 2019
 
+Language: JavaScript
+
 Install
 
 ```
