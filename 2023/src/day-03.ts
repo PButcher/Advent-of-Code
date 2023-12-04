@@ -18,9 +18,6 @@ function isNumber(a: any) {
     const partNumbers = [];
 
     for (let line = 0; line < lines.length; line++) {
-      // Part numbers on this line
-      // const linePartNumbers = [];
-
       let potentialPartNumber = "";
       // <= because we need to do one extra loop to check for end of line
       for (let i = 0; i <= lines[line].length; i++) {
