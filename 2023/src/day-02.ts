@@ -100,6 +100,6 @@
   if (puzzle2AnswerEl) puzzle2AnswerEl.innerText = puzzle2Answer;
 
   // Log puzzles
-  console.log(`Day 01 Puzzle 1 Answer: ${puzzle1Answer}`);
-  console.log(`Day 01 Puzzle 2 Answer: ${puzzle2Answer}`);
+  console.log(`Day 02 Puzzle 1 Answer: ${puzzle1Answer}`);
+  console.log(`Day 02 Puzzle 2 Answer: ${puzzle2Answer}`);
 })();
