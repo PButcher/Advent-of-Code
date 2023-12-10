@@ -87,28 +87,33 @@
     // const [starts, ends] = generateSeedRanges();
     // console.log(starts, ends);
 
-    // const locations: number[] = [];
+    // // const locations: number[] = [];
+    // let minLocation = Infinity;
 
     // for (let s = 0; s < starts.length; s++) {
     //   for (let e = starts[s]; e <= starts[s] + ends[s] - 1; e++) {
-    //     // for (let i = 0; i < seeds.length; i++) {
-    //     let soil = generateMapTable(e, seedToSoilMap);
-    //     let fertilizer = generateMapTable(soil, soilToFertilizerMap);
-    //     let water = generateMapTable(fertilizer, fertilizerToWaterMap);
-    //     let light = generateMapTable(water, waterToLightMap);
-    //     let temperature = generateMapTable(light, lightToTemperatureMap);
-    //     let humidity = generateMapTable(temperature, temperatureToHumidityMap);
-    //     let location = generateMapTable(humidity, humidtyToLocationMap);
+    //     for (let i = 0; i < seeds.length; i++) {
+    //       let soil = generateMapTable(e, seedToSoilMap);
+    //       let fertilizer = generateMapTable(soil, soilToFertilizerMap);
+    //       let water = generateMapTable(fertilizer, fertilizerToWaterMap);
+    //       let light = generateMapTable(water, waterToLightMap);
+    //       let temperature = generateMapTable(light, lightToTemperatureMap);
+    //       let humidity = generateMapTable(
+    //         temperature,
+    //         temperatureToHumidityMap
+    //       );
+    //       let location = generateMapTable(humidity, humidtyToLocationMap);
 
-    //     locations.push(location);
-    //     // }
+    //       // locations.push(location);
+    //       if (location < minLocation) minLocation = location;
+    //     }
     //   }
     // }
 
-    // // console.log(starts, ends);
-    // console.log(locations);
+    // // console.log(locations);
 
-    // return Math.min(...locations).toString();
+    // // return Math.min(...locations).toString();
+    // return minLocation.toString();
     return `\n${res}`;
   }
 
