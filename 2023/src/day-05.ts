@@ -1,6 +1,6 @@
 // Advent of Code 2023 - Day 5
 
-(async function day04() {
+(async function day05() {
   const input = await fetch("./input.txt");
   const res = await input.text();
 

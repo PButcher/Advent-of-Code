@@ -1,6 +1,6 @@
 // Advent of Code 2023 - Day 6
 
-(async function day04() {
+(async function day06() {
   const input = await fetch("./input.txt");
   const res = await input.text();
   const lines = res.trim().split("\n");
