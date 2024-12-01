@@ -1,0 +1,11 @@
+{
+  "include": ["./src/"],
+  "compilerOptions": {
+    "target": "es2016",
+    "rootDir": "./src",
+    "outDir": "./build",
+    "esModuleInterop": true,
+    "allowJs": true,
+    "strict": true,
+  }
+}

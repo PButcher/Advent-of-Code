@@ -55,17 +55,17 @@
     return Object.keys(counts).map((el) => counts[el]);
   }
 
-  function countUniqueCardsWithFace(h: string[]) {
-    const counts: { [key: string]: number } = {};
-    for (let card of h) {
-      counts[card] = (counts[card] || 0) + 1;
-    }
-    return Object.keys(counts).sort(
-      (a, b) => Object.keys(a)[a] - Object.keys(a)[b]
-    );
-  }
+  // function countUniqueCardsWithFace(h: string[]) {
+  //   const counts: { [key: string]: number } = {};
+  //   for (let card of h) {
+  //     counts[card] = (counts[card] || 0) + 1;
+  //   }
+  //   return Object.keys(counts).sort(
+  //     (a, b) => Object.keys(a)[a] - Object.keys(a)[b]
+  //   );
+  // }
 
-  console.log(countUniqueCardsWithFace(["Q", "Q", "Q", "Q", "2"]));
+  // console.log(countUniqueCardsWithFace(["Q", "Q", "Q", "Q", "2"]));
 
   function parseCamelHand(hand: string) {
     const h = Array.from(hand);
