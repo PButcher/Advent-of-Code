@@ -1,7 +1,6 @@
 // Advent of Code 2024 - Day 1
 
 const day = "01";
-console.log("test");
 
 (async () => {
   const input = await fetch("./input.txt");
