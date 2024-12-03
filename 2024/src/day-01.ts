@@ -1,8 +1,7 @@
-// Advent of Code 2024 - Day 1
-
-const day = "01";
+// Advent of Code 2024 - Day 2
 
 (async () => {
+  const day = "01";
   const input = await fetch("./input.txt");
   const res = await input.text();
   const lines = res.trim().split("\n");
