@@ -1,0 +1,56 @@
+html {
+  font-family: sans-serif;
+  height: 100%;
+}
+body {
+  position: relative;
+  max-width: 900px;
+  min-height: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 50px;
+}
+main {
+  padding-bottom: 100px;
+}
+h1 {
+  margin-top: 0px;
+}
+span.answer {
+  padding: 2px 3px;
+  border: solid 1px #ccc;
+  background-color: #eee;
+  border-radius: 2px;
+  font-family: "Courier New", monospace;
+}
+.output {
+  font-style: italic;
+  color: #aaa;
+}
+footer {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  bottom: 50px;
+  width: calc(100% - 100px);
+  height: 50px;
+}
+footer a {
+  padding: 10px 20px;
+  line-height: 30px;
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.1);
+  color: #333;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+footer a:hover {
+  color: #777;
+}
+footer a[disabled] {
+  background-color: transparent;
+  color: rgba(0, 0, 0, 0.25);
+  pointer-events: none;
+}
